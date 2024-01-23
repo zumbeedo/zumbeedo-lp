@@ -1,0 +1,18 @@
+---
+import Icon, { type Props as IconProps } from "./Icon.astro";
+interface Props {
+  icon: IconProps["icon"];
+  title: string;
+  description: string;
+}
+
+const { description, icon, title } = Astro.props;
+---
+
+<div class="flex flex-col items-center">
+  <Icon icon={icon} />
+  <p class="py-4 font-medium text-xl w-full text-center">{title}</p>
+  <p class="text-center w-4/5 text-secondary-600">
+    {description}
+  </p>
+</div>

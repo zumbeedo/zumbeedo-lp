@@ -1,0 +1,361 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import FuncDescription from "../components/FuncDescription.astro";
+import Pros from "../components/Pros.astro";
+import Collaborator from "../components/Collaborator.astro";
+
+import phone from "../assets/images/android.png";
+import AnchorTag from "../components/AnchorTag.astro";
+import Hives from "../assets/images/hives.png";
+import HomePage from "../assets/images/home-page.png";
+import Screenshots from "../assets/images/screenshots.png";
+import FormImage from "../assets/images/form-image.png";
+import TextInput from "../components/TextInput.astro";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("username");
+    const email = data.get("email");
+    const phone = data.get("phone");
+
+    console.log(name, email, phone);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <div
+      class="bg-gradient-to-r items-center flex flex-col w-full from-brand-600 via-primary-600 to-primary-700"
+    >
+      <header
+        class="flex w-full justify-between px-16 py-5 border-b-2 border-white items-center flex-row"
+      >
+        <h1 class="text-2xl capitalize font-semibold text-secondary-200">
+          Zumbeedo
+        </h1>
+
+        <nav class="w-2/5">
+          <ul class="flex flex-row justify-between">
+            <AnchorTag text="Home" link="#home" />
+            <AnchorTag text="Sobre" link="#about" />
+            <AnchorTag text="Equipe" link="#squad" />
+            <AnchorTag text="Serviços" link="#services" />
+            <AnchorTag text="Contate-nos" link="#contact" />
+          </ul>
+        </nav>
+      </header>
+
+      <section class="w-3/5 flex py-16">
+        <div class="w-1/2 h-auto flex flex-col justify-center">
+          <p class="text-3xl pb-12">
+            <span class="text-white">Um aplicativo inovador<br /></span> para monitorar
+            e garantir o bem-estar contínuo das suas abelhas!
+          </p>
+
+          <button
+            class="text-white border-4 font-bold text-2xl border-white w-fit py-1 px-2"
+            >Testar agora</button
+          >
+        </div>
+
+        <div>
+          <Image src={phone} alt="app on smartphone" />
+        </div>
+      </section>
+    </div>
+
+    <!-- SOBRE -->
+    <section id="about" class="w-full items-center flex flex-col">
+      <div
+        class="flex flex-row justify-between p-16 w-4/5 shadow-2xl relative -top-10 bg-secondary-250"
+      >
+        <Pros
+          icon="phone"
+          title="Responsive"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+        />
+
+        <Pros
+          icon="settings"
+          title="Settings"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+        />
+
+        <Pros
+          icon="support"
+          title="Support"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+        />
+      </div>
+
+      <div class="pt-20">
+        <h2 class="text-center text-3xl font-bold text-brand-700">
+          Sobre o aplicativo
+        </h2>
+        <p class="text-center text-secondary-600 pt-2">
+          Um aplicativo para monitorar e garantir o bem-estar<br />contínuo das
+          suas abelhas.
+        </p>
+      </div>
+
+      <div class="py-14 flex flex-row justify-between w-4/5">
+        <div class="pr-10">
+          <p class="text-xl font-medium">De um olhada no nosso App</p>
+          <p class="text-base text-secondary-600">
+            O Zumbeedo é uma aplicação móvel de baixo custo para a detecção
+            automática da saúde de colmeias baseado no som produzido pelas
+            abelhas, guiando os apicultores na intervenção prévia das colmeias
+            em risco, aumentando a eficiência na produção.
+          </p>
+
+          <div class="pt-10">
+            <div class="flex flex-row">
+              <Icon icon="check" />
+              <p class="text-brand-700 pl-2">Não invasivo..</p>
+            </div>
+            <div class="flex flex-row pt-4">
+              <Icon icon="check" />
+              <p class="text-brand-700 pl-2">Diagnóstivo offline.</p>
+            </div>
+            <div class="flex flex-row pt-4">
+              <Icon icon="check" />
+              <p class="text-brand-700 pl-2">Agilidade no monitoramento.</p>
+            </div>
+          </div>
+        </div>
+        <Image src={Hives} alt="hives" />
+      </div>
+    </section>
+
+    <!-- FUNÇÕES ESPECÍFICAS -->
+    <section id="services" class="bg-secondary-400 py-20 items-center">
+      <div>
+        <h2 class="text-center text-3xl font-bold text-brand-700">
+          Funções específicas
+        </h2>
+        <p class="text-center text-secondary-600 pt-2">
+          Lorem ipsum dolor sit amet. Aut consequatur galisum <br />et
+          perferendis recusandae ut iste maxime? Ab omnis pariatur.
+        </p>
+      </div>
+
+      <div class="pt-12 flex flex-row justify-center items-center">
+        <div class="w-1/5">
+          <FuncDescription
+            side="right"
+            title="Consulta da Colmeia"
+            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+          />
+          <FuncDescription
+            side="right"
+            title="Organizar Apiário"
+            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+          />
+          <FuncDescription
+            side="right"
+            title="Compartilhar Diagnóstico"
+            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+          />
+        </div>
+
+        <div class="px-24">
+          <Image
+            class="h-[490px] w-auto"
+            src={HomePage}
+            alt="Página inicial do app"
+          />
+        </div>
+
+        <div class="w-1/5">
+          <FuncDescription
+            title="Histórico"
+            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+          />
+          <FuncDescription
+            title="Anotações com Áudio"
+            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+          />
+          <FuncDescription
+            title="Grupo com Parceiros"
+            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <section class="bg-secondary-500 py-12 items-center">
+      <div>
+        <h2 class="text-center text-3xl font-bold text-secondary-200">
+          Screnshots do Nosso App
+        </h2>
+        <p class="text-center text-secondary-250 pt-2">
+          Lorem ipsum dolor sit amet. Aut consequatur galisum <br />et
+          perferendis recusandae ut iste maxime? Ab omnis pariatur.
+        </p>
+      </div>
+
+      <div class="pt-10">
+        <Image class="px-52" src={Screenshots} alt="Páginas do app" />
+      </div>
+    </section>
+
+    <!-- CADASTRO -->
+    <section
+      id="contact"
+      class="py-16 items-center flex flex-col bg-secondary-600"
+    >
+      <div>
+        <h2 class="text-center uppercase text-3xl font-bold text-secondary-200">
+          Faça seu cadastro
+        </h2>
+        <p class="text-center text-secondary-250 pt-2 pb-10">
+          Seja notificado quando o APP estiver disponível.
+        </p>
+      </div>
+
+      <div class="flex flex-row w-3/5 shadow-2xl shadow-brand-700 rounded-xl">
+        <div class="w-1/2 py-6 px-11">
+          <p class="uppercase text-xl font-bold text-secondary-250">
+            Registre-se
+          </p>
+          <p class="text-base text-secondary-400 pb-6">
+            Preencha os campos abaixo.
+          </p>
+          <form class="flex flex-col gap-5" method="POST">
+            <TextInput type="text" label="Nome" name="username" />
+            <TextInput type="email" label="E-mail" name="email" />
+            <TextInput type="text" label="Telefone" name="phone" />
+            <button
+              class="bg-secondary-400 py-2 w-fit text-brand-700 font-bold px-6 rounded flex items-center justify-center"
+            >
+              Submeter
+            </button>
+          </form>
+        </div>
+        <div class="w-1/2">
+          <Image src={FormImage} alt="usuário realizando cadastro" />
+        </div>
+      </div>
+    </section>
+
+    <!-- EQUIPE -->
+    <section id="squad" class="bg-secondary-400 items-center pt-10 pb-20">
+      <div>
+        <h2 class="text-center text-3xl font-bold text-brand-700">Equipe</h2>
+        <p class="text-center text-secondary-600 pt-2">
+          Conheça nossa colmeia!
+        </p>
+      </div>
+
+      <div class="px-52 py-12">
+        <Collaborator
+          items={[
+            {
+              imgSrc: "/src/assets/images/collaborators/deborah.png",
+              name: "Deborah Magalhães",
+              role: "Pesquisadora em Processamento de Áudio",
+              location: "Picos - PI",
+            },
+            {
+              imgSrc: "/src/assets/images/collaborators/lana.png",
+              name: "Lana Mesquita",
+              role: "Gerente de Projetos",
+              location: "Fortaleza - CE",
+            },
+            {
+              imgSrc: "/src/assets/images/collaborators/fabia.png",
+              name: "Fábia Pereira",
+              role: "Pesquisadora em Apicultura (Embrapa)",
+              location: "Teresina - PI",
+            },
+            {
+              imgSrc: "/src/assets/images/collaborators/jederson.png",
+              name: "Jederson Luz",
+              role: "Especialista em Inteligência Artificial",
+              location: "Picos - PI",
+            },
+            {
+              imgSrc: "/src/assets/images/collaborators/myllena.png",
+              name: "Myllena Oliveira",
+              role: "Especialista em Inteligência Artificial",
+              location: "Picos - PI",
+            },
+            {
+              imgSrc: "/src/assets/images/collaborators/adriano.png",
+              name: "Adriano Sousa",
+              role: "Desenvolvedor Mobile",
+              location: "Acauã - PI",
+            },
+            {
+              imgSrc: "/src/assets/images/collaborators/mayra.png",
+              name: "Mayra Oliveira",
+              role: "UX/UI Designer",
+              location: "Picos - PI",
+            },
+          ]}
+        />
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="py-12 bg-secondary-250 items-center flex flex-col">
+      <h2 class="text-center text-3xl font-bold text-brand-700">Contato</h2>
+      <p class="text-xl pt-10 text-secondary-600">
+        Quer entrar em contato? Envie uma mensagem!
+      </p>
+      <a
+        class="text-secondary-600 pt-12"
+        target="_blank"
+        href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=zumbeedoapp@gmail.com&su=Contato+Zumbeedo"
+        >E-mail: <span class="underline">zumbeedoapp@gmail.com</span></a
+      >
+    </section>
+
+    <footer class="py-16 items-center bg-secondary-600 flex flex-col">
+      <button
+        id="scrollToTop"
+        class="flex flex-row items-center py-2 px-4 bg-secondary-250"
+      >
+        <Icon icon="chevron-up" />
+        <span class="pl-4 text-lg">Topo</span>
+      </button>
+
+      <script>
+        const button = document.querySelector("#scrollToTop");
+
+        button?.addEventListener("click", () =>
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+        );
+      </script>
+
+      <div class="flex flex-row py-12 gap-8">
+        <a target="_blank" href="https://www.instagram.com/zumbeedoapp/">
+          <Icon icon="instagram" />
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/company/zumbeedo/">
+          <Icon icon="linkedin" />
+        </a>
+      </div>
+      <div>
+        <p class="text-xl font-medium text-secondary-200">Zumbeedo</p>
+      </div>
+      <div>
+        <p class="text-sm font-light text-secondary-250">
+          © 2024 Zumbeedo. Todos os direitos reservados.
+        </p>
+      </div>
+    </footer>
+  </main>
+</Layout>

@@ -1,0 +1,39 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import ImageD from "../assets/images/collaborators/deborah.png";
+
+interface Props {
+  items: {
+    imgSrc: string;
+    name: string;
+    role: string;
+    location: string;
+  }[];
+}
+
+const { items } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/collaborators/*.{jpeg,jpg,png,gif}"
+);
+---
+
+<div class="flex flex-row flex-wrap gap-7 items-center">
+  {
+    items.map((item) => {
+      return (
+        <div class="bg-secondary-250 w-52 min-h-[330px]">
+          <div class="h-52 overflow-hidden">
+            <Image src={images[item.imgSrc]()} alt={item.name} />
+          </div>
+
+          <div class="p-3 bg-secondary-250 w-full text-brand-700">
+            <h6>{item.name}</h6>
+            <p>{item.role}</p>
+            <p>{item.location}</p>
+          </div>
+        </div>
+      );
+    })
+  }
+</div>
