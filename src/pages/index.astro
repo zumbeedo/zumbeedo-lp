@@ -30,7 +30,7 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Bem vindo ao Zumbeedo.">
   <main>
     <div
       class="bg-gradient-to-r items-center flex flex-col w-full from-brand-600 via-primary-600 to-primary-700"
@@ -48,7 +48,8 @@ if (Astro.request.method === "POST") {
             <AnchorTag text="Sobre" link="#about" />
             <AnchorTag text="Equipe" link="#squad" />
             <AnchorTag text="Serviços" link="#services" />
-            <AnchorTag text="Contate-nos" link="#contact" />
+            <AnchorTag text="Contato" link="#contact" />
+            <AnchorTag text="Cadastre-se" link="#registry" />
           </ul>
         </nav>
       </header>
@@ -210,7 +211,7 @@ if (Astro.request.method === "POST") {
 
     <!-- CADASTRO -->
     <section
-      id="contact"
+      id="registry"
       class="py-16 items-center flex flex-col bg-secondary-600"
     >
       <div>
@@ -307,7 +308,10 @@ if (Astro.request.method === "POST") {
     </section>
 
     <!-- CONTATO -->
-    <section class="py-12 bg-secondary-250 items-center flex flex-col">
+    <section
+      id="contact"
+      class="py-12 bg-secondary-250 items-center flex flex-col"
+    >
       <h2 class="text-center text-3xl font-bold text-brand-700">Contato</h2>
       <p class="text-xl pt-10 text-secondary-600">
         Quer entrar em contato? Envie uma mensagem!
