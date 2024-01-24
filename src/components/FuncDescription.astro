@@ -8,7 +8,7 @@ export interface Props {
 const { title, description, side = "left" } = Astro.props as Props;
 ---
 
-<div class="pb-10">
+<div class="pb-10 w-full px-4 md:px-0 sm:max-w-80">
   <h4
     style=`text-align: ${side};`
     class="text-lg pb-4 text-brand-700 font-semibold"

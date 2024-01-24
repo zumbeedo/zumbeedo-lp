@@ -31,7 +31,7 @@ if (Astro.request.method === "POST") {
 ---
 
 <Layout title="Bem vindo ao Zumbeedo.">
-  <main>
+  <main class="flex flex-col items-center">
     <div
       class="bg-gradient-to-r items-center flex flex-col w-full from-brand-600 via-primary-600 to-primary-700"
     >
@@ -42,7 +42,7 @@ if (Astro.request.method === "POST") {
           Zumbeedo
         </h1>
 
-        <nav class="w-2/5">
+        <nav class="hidden lg:block md:w-3/5 xl:w-2/5">
           <ul class="flex flex-row justify-between">
             <AnchorTag text="Home" link="#home" />
             <AnchorTag text="Sobre" link="#about" />
@@ -54,8 +54,8 @@ if (Astro.request.method === "POST") {
         </nav>
       </header>
 
-      <section class="w-3/5 flex py-16">
-        <div class="w-1/2 h-auto flex flex-col justify-center">
+      <section class="w-3/5 2xl:w-2/5 flex py-16 gap-4">
+        <div class="w-full md:w-1/2 h-auto md:flex flex-col justify-center">
           <p class="text-3xl pb-12">
             <span class="text-white">Um aplicativo inovador<br /></span> para monitorar
             e garantir o bem-estar contínuo das suas abelhas!
@@ -67,16 +67,16 @@ if (Astro.request.method === "POST") {
           >
         </div>
 
-        <div>
+        <div class="hidden md:block md:w-1/2">
           <Image src={phone} alt="app on smartphone" />
         </div>
       </section>
     </div>
 
     <!-- SOBRE -->
-    <section id="about" class="w-full items-center flex flex-col">
+    <section id="about" class="w-full items-center 2xl:w-3/5 flex flex-col">
       <div
-        class="flex flex-row justify-between p-16 w-4/5 shadow-2xl relative -top-10 bg-secondary-250"
+        class="flex flex-col gap-4 sm:flex-row justify-between p-16 w-4/5 shadow-2xl relative -top-10 bg-secondary-250"
       >
         <Pros
           icon="phone"
@@ -98,17 +98,19 @@ if (Astro.request.method === "POST") {
       </div>
 
       <div class="pt-20">
-        <h2 class="text-center text-3xl font-bold text-brand-700">
+        <h2 class="text-center text-2xl sm:text-3xl font-bold text-brand-700">
           Sobre o aplicativo
         </h2>
-        <p class="text-center text-secondary-600 pt-2">
+        <p class="text-sm sm:text-base text-center text-secondary-600 pt-2">
           Um aplicativo para monitorar e garantir o bem-estar<br />contínuo das
           suas abelhas.
         </p>
       </div>
 
-      <div class="py-14 flex flex-row justify-between w-4/5">
-        <div class="pr-10">
+      <div
+        class="py-14 flex flex-row flex-wrap-reverse justify-between w-full xl:w-4/5 px-14"
+      >
+        <div class="pr-10 w-full pt-4 lg:pt-0 lg:w-1/2">
           <p class="text-xl font-medium">De um olhada no nosso App</p>
           <p class="text-base text-secondary-600">
             O Zumbeedo é uma aplicação móvel de baixo custo para a detecção
@@ -132,24 +134,28 @@ if (Astro.request.method === "POST") {
             </div>
           </div>
         </div>
-        <Image src={Hives} alt="hives" />
+        <div
+          class="w-full lg:w-1/2 flex pb-5 sm:pb-0 justify-center items-center"
+        >
+          <Image src={Hives} alt="hives" />
+        </div>
       </div>
     </section>
 
     <!-- FUNÇÕES ESPECÍFICAS -->
-    <section id="services" class="bg-secondary-400 py-20 items-center">
+    <section id="services" class="bg-secondary-400 w-full py-20 items-center">
       <div>
-        <h2 class="text-center text-3xl font-bold text-brand-700">
+        <h2 class="text-center text-2xl sm:text-3xl font-bold text-brand-700">
           Funções específicas
         </h2>
-        <p class="text-center text-secondary-600 pt-2">
+        <p class="text-center text-sm sm:text-base text-secondary-600 pt-2">
           Lorem ipsum dolor sit amet. Aut consequatur galisum <br />et
           perferendis recusandae ut iste maxime? Ab omnis pariatur.
         </p>
       </div>
 
-      <div class="pt-12 flex flex-row justify-center items-center">
-        <div class="w-1/5">
+      <div class="pt-12 flex flex-row flex-wrap justify-center items-center">
+        <div class="sm:w-1/5 items-end flex flex-col">
           <FuncDescription
             side="right"
             title="Consulta da Colmeia"
@@ -167,15 +173,15 @@ if (Astro.request.method === "POST") {
           />
         </div>
 
-        <div class="px-24">
+        <div class="w-full sm:w-fit flex justify-center sm:px-12 lg-px-24">
           <Image
-            class="h-[490px] w-auto"
+            class="h-[320px] sm:h-[490px] w-auto"
             src={HomePage}
             alt="Página inicial do app"
           />
         </div>
 
-        <div class="w-1/5">
+        <div class="sm:w-1/5 items-end flex flex-col pt-4 sm:pt-0">
           <FuncDescription
             title="Histórico"
             description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab facilis libero id maiores."
@@ -195,36 +201,48 @@ if (Astro.request.method === "POST") {
     <!-- SCREENSHOTS -->
     <section class="bg-secondary-500 py-12 items-center">
       <div>
-        <h2 class="text-center text-3xl font-bold text-secondary-200">
+        <h2
+          class="text-center text-2xl sm:text-3xl font-bold text-secondary-200"
+        >
           Screnshots do Nosso App
         </h2>
-        <p class="text-center text-secondary-250 pt-2">
+        <p class="text-sm sm:text-base text-center text-secondary-250 pt-2">
           Lorem ipsum dolor sit amet. Aut consequatur galisum <br />et
           perferendis recusandae ut iste maxime? Ab omnis pariatur.
         </p>
       </div>
 
-      <div class="pt-10">
-        <Image class="px-52" src={Screenshots} alt="Páginas do app" />
+      <div class="pt-10 w-full">
+        <Image
+          class="px-6 sm:px-24 xl:px-52"
+          src={Screenshots}
+          alt="Páginas do app"
+        />
       </div>
     </section>
 
     <!-- CADASTRO -->
     <section
       id="registry"
-      class="py-16 items-center flex flex-col bg-secondary-600"
+      class="py-16 items-center flex w-full flex-col bg-secondary-600"
     >
       <div>
-        <h2 class="text-center uppercase text-3xl font-bold text-secondary-200">
+        <h2
+          class="text-center uppercase text-2xl sm:text-3xl font-bold text-secondary-200"
+        >
           Faça seu cadastro
         </h2>
-        <p class="text-center text-secondary-250 pt-2 pb-10">
+        <p
+          class="text-center text-sm sm:text-base text-secondary-250 pt-2 pb-10"
+        >
           Seja notificado quando o APP estiver disponível.
         </p>
       </div>
 
-      <div class="flex flex-row w-3/5 shadow-2xl shadow-brand-700 rounded-xl">
-        <div class="w-1/2 py-6 px-11">
+      <div
+        class="flex flex-row w-4/5 lg:w-3/5 shadow-2xl shadow-brand-700 rounded-xl"
+      >
+        <div class="w-full md:w-1/2 py-6 px-6 md:px-11">
           <p class="uppercase text-xl font-bold text-secondary-250">
             Registre-se
           </p>
@@ -242,22 +260,31 @@ if (Astro.request.method === "POST") {
             </button>
           </form>
         </div>
-        <div class="w-1/2">
-          <Image src={FormImage} alt="usuário realizando cadastro" />
+        <div class="sm:w-1/2 relative overflow-hidden hidden md:block">
+          <Image
+            class="absolute right-0"
+            src={FormImage}
+            alt="usuário realizando cadastro"
+          />
         </div>
       </div>
     </section>
 
     <!-- EQUIPE -->
-    <section id="squad" class="bg-secondary-400 items-center pt-10 pb-20">
+    <section
+      id="squad"
+      class="bg-secondary-400 w-full items-center pt-10 pb-20"
+    >
       <div>
-        <h2 class="text-center text-3xl font-bold text-brand-700">Equipe</h2>
-        <p class="text-center text-secondary-600 pt-2">
+        <h2 class="text-center text-2xl sm:text-3xl font-bold text-brand-700">
+          Equipe
+        </h2>
+        <p class="text-center text-sm sm:text-base text-secondary-600 pt-2">
           Conheça nossa colmeia!
         </p>
       </div>
 
-      <div class="px-52 py-12">
+      <div class="sm:px-20 py-12">
         <Collaborator
           items={[
             {
@@ -310,10 +337,12 @@ if (Astro.request.method === "POST") {
     <!-- CONTATO -->
     <section
       id="contact"
-      class="py-12 bg-secondary-250 items-center flex flex-col"
+      class="py-12 bg-red-250 items-center w-full flex flex-col"
     >
-      <h2 class="text-center text-3xl font-bold text-brand-700">Contato</h2>
-      <p class="text-xl pt-10 text-secondary-600">
+      <h2 class="text-center text-2xl sm:text-3xl font-bold text-brand-700">
+        Contato
+      </h2>
+      <p class="text-xl pt-10 text-center px-4 text-secondary-600">
         Quer entrar em contato? Envie uma mensagem!
       </p>
       <a
@@ -324,7 +353,7 @@ if (Astro.request.method === "POST") {
       >
     </section>
 
-    <footer class="py-16 items-center bg-secondary-600 flex flex-col">
+    <footer class="py-16 items-center w-full bg-secondary-600 flex flex-col">
       <button
         id="scrollToTop"
         class="flex flex-row items-center py-2 px-4 bg-secondary-250"
@@ -356,7 +385,7 @@ if (Astro.request.method === "POST") {
         <p class="text-xl font-medium text-secondary-200">Zumbeedo</p>
       </div>
       <div>
-        <p class="text-sm font-light text-secondary-250">
+        <p class="text-sm font-light px-4 text-center text-secondary-250">
           © 2024 Zumbeedo. Todos os direitos reservados.
         </p>
       </div>
