@@ -13,21 +13,6 @@ import HomePage from "../assets/images/home-page.png";
 import Screenshots from "../assets/images/screenshots.png";
 import FormImage from "../assets/images/form-image.png";
 import TextInput from "../components/TextInput.astro";
-
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const name = data.get("username");
-    const email = data.get("email");
-    const phone = data.get("phone");
-
-    console.log(name, email, phone);
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
-}
 ---
 
 <Layout title="Bem vindo ao Zumbeedo.">
@@ -250,15 +235,89 @@ if (Astro.request.method === "POST") {
           <p class="text-base text-secondary-400 pb-6">
             Preencha os campos abaixo.
           </p>
-          <form class="flex flex-col gap-5" method="POST">
+          <form id="form" class="flex flex-col gap-5" method="POST">
             <TextInput type="text" label="Nome" name="username" />
             <TextInput type="email" label="E-mail" name="email" />
-            <TextInput type="text" label="Telefone" name="phone" />
+            <TextInput
+              id="phone"
+              type="text"
+              maxlength={16}
+              label="Telefone"
+              name="phone"
+            />
+            <script>
+              const input = document.getElementById("phone");
+
+              input?.addEventListener(
+                "keypress",
+                () => (input.value = maskPhone(input.value))
+              );
+
+              function maskPhone(v: string) {
+                v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+                v = v.replace(/^(\d\d)(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+                v = v.replace(/(\(\d{2}\)) (\d)/g, "$1 $2 "); //Coloca um espaço entre o quarto e o quinto dígitos
+                v = v.replace(/(\d{4})(\d)/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+                return v;
+              }
+            </script>
             <button
               class="bg-secondary-400 py-2 w-fit text-brand-700 font-bold px-6 rounded flex items-center justify-center"
             >
               Submeter
             </button>
+            <script>
+              const form = document.getElementById("form");
+
+              const onSubmit = async (event: SubmitEvent) => {
+                event.preventDefault();
+                const node = document.createElement("p");
+                node.textContent = "Enviando...";
+                node.classList.add(
+                  "text-secondary-250",
+                  "text-sm",
+                  "font-bold"
+                );
+                form?.appendChild(node);
+                try {
+                  const data = event?.target?.elements;
+                  const name = data.username.value;
+                  const email = data.email.value;
+                  const phone = data.phone.value;
+
+                  console.log(name, email, phone);
+
+                  await fetch(
+                    "https://zumbeedo-ai-api-homologacao.up.railway.app/early-access/",
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ name, email, phone }),
+                    }
+                  );
+
+                  node.textContent = "Enviado!";
+                  node.classList.replace(
+                    "text-secondary-250",
+                    "text-green-400"
+                  );
+                } catch (error) {
+                  node.textContent = "Erro! Tente novamente.";
+                  node.classList.replace("text-secondary-250", "text-red-400");
+                  if (error instanceof Error) {
+                    console.error(error.message);
+                  }
+                } finally {
+                  setTimeout(() => {
+                    form?.removeChild(node);
+                  }, 3000);
+                }
+              };
+
+              form?.addEventListener("submit", (event) => onSubmit(event));
+            </script>
           </form>
         </div>
         <div class="sm:w-1/2 relative hidden md:block">
