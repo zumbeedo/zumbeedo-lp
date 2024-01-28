@@ -250,7 +250,10 @@ import TextInput from "../components/TextInput.astro";
 
               input?.addEventListener(
                 "keypress",
-                () => (input.value = maskPhone(input.value))
+                () =>
+                  ((input as HTMLInputElement).value = maskPhone(
+                    (input as HTMLInputElement).value
+                  ))
               );
 
               function maskPhone(v: string) {
@@ -280,12 +283,15 @@ import TextInput from "../components/TextInput.astro";
                 );
                 form?.appendChild(node);
                 try {
-                  const data = event?.target?.elements;
-                  const name = data.username.value;
-                  const email = data.email.value;
-                  const phone = data.phone.value;
+                  const data = (event?.target as HTMLFormElement)?.elements;
+                  const name = (data.namedItem("username") as HTMLInputElement)
+                    ?.value;
+                  const email = (data.namedItem("email") as HTMLInputElement)
+                    ?.value;
+                  const phone = (data.namedItem("phone") as HTMLInputElement)
+                    ?.value;
 
-                  console.log(name, email, phone);
+                  console.log("form", name, email, phone);
 
                   await fetch(
                     "https://zumbeedo-ai-api-homologacao.up.railway.app/early-access/",
