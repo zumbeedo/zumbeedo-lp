@@ -3,7 +3,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://zumbeedo-lp.github.io',
+  site: 'https://zumbeedo.com.br',
   base: '/zumbeedo-lp',
   integrations: [tailwind()]
 });
