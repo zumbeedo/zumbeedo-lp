@@ -15,21 +15,33 @@ const { title } = Astro.props;
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Primary Meta Tags -->
-    <link rel="canonical" href={`https://zumbeedo.com.br${Astro.url.pathname}`} />
+    <link
+      rel="canonical"
+      href={`https://zumbeedo.com.br${Astro.url.pathname}`}
+    />
     <title>{title}</title>
     <meta name="title" content={title} />
-    <meta name="description" content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!" />
-    
+    <meta
+      name="description"
+      content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!"
+    />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={`https://zumbeedo.com.br${Astro.url.pathname}`} />
+    <meta
+      property="og:url"
+      content={`https://zumbeedo.com.br${Astro.url.pathname}`}
+    />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!" />
-    <meta property="og:image" content={phone} />
+    <meta
+      property="og:description"
+      content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!"
+    />
+    <meta property="og:image" content={phone.src} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -38,8 +50,11 @@ const { title } = Astro.props;
       content={`https://zumbeedo.com.br${Astro.url.pathname}`}
     />
     <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!" />
-    <meta property="twitter:image" content={phone} />
+    <meta
+      property="twitter:description"
+      content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!"
+    />
+    <meta property="twitter:image" content={phone.src} />
   </head>
   <body>
     <slot />
