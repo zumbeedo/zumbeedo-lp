@@ -14,7 +14,7 @@ const { label, name, ...props }: Props = Astro.props;
     <label class="text-secondary-400" for={name}>{label}</label>
   </p>
   <input
-    class="bg-transparent text-secondary-200 border-0 focus:border-b-2 focus:border-secondary-200 focus:outline-none"
+    class="bg-transparent w-full text-secondary-200 border-0 focus:border-b-2 focus:border-secondary-200 focus:outline-none"
     id={name}
     name={name}
     {...props}
