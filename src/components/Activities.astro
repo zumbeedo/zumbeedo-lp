@@ -1,0 +1,40 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  items: {
+    imgSrc: string;
+    title: string;
+    description: string;
+  }[];
+}
+
+const { items } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/activities/*.{jpeg,jpg,png,gif}"
+);
+---
+
+<div class="flex flex-row flex-wrap gap-7 w-full justify-center items-center">
+  {
+    items.map((item) => {
+      return (
+        <div class="w-80 min-h-[300px]">
+          <div class="overflow-hidden">
+            <Image src={images[item.imgSrc]()} alt={item.title} />
+          </div>
+
+          <div class="p-3 w-full">
+            <h6 class="text-lg font-semibold text-secondary-200 text-center">
+              {item.title}
+            </h6>
+            <p class="text-sm text-secondary-250 text-center">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      );
+    })
+  }
+</div>

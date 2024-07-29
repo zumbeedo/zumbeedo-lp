@@ -13,6 +13,7 @@ import Hives from "../assets/images/hives.png";
 import HomePage from "../assets/images/home-page.png";
 import Screenshots from "../assets/images/screenshots.png";
 import FormImage from "../assets/images/form-image.png";
+import Activities from "../components/Activities.astro";
 ---
 
 <Layout title="Zumbeedo">
@@ -32,6 +33,7 @@ import FormImage from "../assets/images/form-image.png";
             <AnchorTag text="Home" link="#home" />
             <AnchorTag text="Sobre" link="#about" />
             <AnchorTag text="Equipe" link="#squad" />
+            <AnchorTag text="Atividades" link="#activities" />
             <AnchorTag text="Serviços" link="#services" />
             <AnchorTag text="Contato" link="#contact" />
             <AnchorTag text="Cadastre-se" link="#registry" />
@@ -403,6 +405,70 @@ import FormImage from "../assets/images/form-image.png";
               name: "Bianca Soares",
               role: "Desenvolvedora Backend",
               location: "Picos - PI",
+            },
+          ]}
+        />
+      </div>
+    </section>
+
+    <!-- ATIVIDADES -->
+    <section id="activities" class="bg-secondary-500 w-full pt-12 items-center">
+      <div>
+        <h2
+          class="text-center text-2xl sm:text-3xl font-bold text-secondary-200"
+        >
+          Nossas Atividades Recentes
+        </h2>
+        <p class="text-center text-sm sm:text-base text-secondary-250 pt-2">
+          Dê uma olhada nos projetos e atividades recentes e em destaque que
+          participamos.
+        </p>
+      </div>
+
+      <div class="pt-10 w-full">
+        <Activities
+          items={[
+            {
+              imgSrc: "/src/assets/images/activities/like-a-boss.png",
+              title: "SEBRAE Like a Boss",
+              description: "Programa de pré-aceleração de startups.",
+            },
+            {
+              imgSrc: "/src/assets/images/activities/centelha.png",
+              title: "CENTELHA",
+              description:
+                "Prêmio de 3° lugar no Programa de Incentivo  a startups inovadoras com capacitação e financiamento no Piauí.",
+            },
+            {
+              imgSrc: "/src/assets/images/activities/empreendedoras-tech.png",
+              title: "Empreededoras Tech",
+              description: "Programa de Apoio a Empreendedoras na Tecnologia.",
+            },
+            {
+              imgSrc: "/src/assets/images/activities/agro.png",
+              title: "Agro Inov Tech",
+              description:
+                "Feira de inovação e tecnologia agropecuária do Piauí.",
+            },
+          ]}
+        />
+        <Activities
+          items={[
+            {
+              imgSrc: "/src/assets/images/activities/e-casa.png",
+              title: "Coleta E-Casa",
+              description: "Coleta de áudio realizada na UFPI de Picos - PI.",
+            },
+            {
+              imgSrc: "/src/assets/images/activities/csbc.png",
+              title: "CSBC",
+              description:
+                "Prêmio de melhor artigo no Congresso da Sociedade Brasileira de Computação.",
+            },
+            {
+              imgSrc: "/src/assets/images/activities/coleta-teresina.png",
+              title: "Coleta em Teresina",
+              description: "Coleta  de Audio realizada em Teresina, Piauí.",
             },
           ]}
         />
