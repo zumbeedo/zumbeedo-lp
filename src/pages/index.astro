@@ -362,12 +362,6 @@ import Activities from "../components/Activities.astro";
               location: "Picos - PI",
             },
             {
-              imgSrc: "/src/assets/images/collaborators/ary.jpg",
-              name: "Ary Machado",
-              role: "Aquisição de Áudio",
-              location: "Cocal - PI",
-            },
-            {
               imgSrc: "/src/assets/images/collaborators/gustavo.jpg",
               name: "Gustavo Sampaio",
               role: "Aquisição de Áudio",
@@ -423,8 +417,8 @@ import Activities from "../components/Activities.astro";
                 "keypress",
                 () =>
                   ((input as HTMLInputElement).value = maskPhone(
-                    (input as HTMLInputElement).value
-                  ))
+                    (input as HTMLInputElement).value,
+                  )),
               );
 
               function maskPhone(v: string) {
@@ -450,7 +444,7 @@ import Activities from "../components/Activities.astro";
                 node.classList.add(
                   "text-secondary-250",
                   "text-sm",
-                  "font-bold"
+                  "font-bold",
                 );
                 form?.appendChild(node);
                 try {
@@ -472,13 +466,13 @@ import Activities from "../components/Activities.astro";
                         "Content-Type": "application/json",
                       },
                       body: JSON.stringify({ name, email, phone }),
-                    }
+                    },
                   );
 
                   node.textContent = "Enviado!";
                   node.classList.replace(
                     "text-secondary-250",
-                    "text-green-400"
+                    "text-green-400",
                   );
                 } catch (error) {
                   node.textContent = "Erro! Tente novamente.";
@@ -542,7 +536,7 @@ import Activities from "../components/Activities.astro";
           window.scrollTo({
             top: 0,
             behavior: "smooth",
-          })
+          }),
         );
       </script>
 
