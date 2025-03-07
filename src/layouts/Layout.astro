@@ -55,6 +55,35 @@ const { title } = Astro.props;
       content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!"
     />
     <meta property="twitter:image" content={phone.src} />
+
+    <!-- Meta Pixel Code -->
+    <script is:inline>
+      window.fbq = function () {
+        window.fbq.callMethod
+          ? window.fbq.callMethod.apply(window.fbq, arguments)
+          : window.fbq.queue.push(arguments);
+      };
+      if (!window._fbq) window._fbq = window.fbq;
+      window.fbq.push = window.fbq;
+      window.fbq.loaded = !0;
+      window.fbq.version = "2.0";
+      window.fbq.queue = [];
+    </script>
+    <script is:inline async src="https://connect.facebook.net/en_US/fbevents.js"
+    ></script>
+    <script is:inline>
+      fbq("init", "1563030861063294");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=1563030861063294&ev=PageView&noscript=1"
+      /></noscript
+    >
+    <!-- End Meta Pixel Code -->
   </head>
   <body>
     <slot />
