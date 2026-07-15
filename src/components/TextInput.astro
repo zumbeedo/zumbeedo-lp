@@ -9,12 +9,12 @@ interface Props extends HTMLAttributes<"input"> {
 const { label, name, ...props }: Props = Astro.props;
 ---
 
-<div class="bg-secondary-500 rounded p-2">
+<div class="bg-secondary-500 rounded-sm p-2">
   <p>
     <label class="text-secondary-400" for={name}>{label}</label>
   </p>
   <input
-    class="bg-transparent w-full text-secondary-200 border-0 focus:border-b-2 focus:border-secondary-200 focus:outline-none"
+    class="bg-transparent w-full text-secondary-200 border-0 focus:border-b-2 focus:border-secondary-200 focus:outline-hidden"
     id={name}
     name={name}
     {...props}
