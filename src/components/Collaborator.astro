@@ -7,7 +7,6 @@ interface Props {
     imgSrc: string;
     name: string;
     role: string;
-    location: string;
   }[];
 }
 
@@ -29,7 +28,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
           <div class="p-3 bg-secondary-250 w-full text-brand-700">
             <h6 class="font-bold">{item.name}</h6>
             <p>{item.role}</p>
-            <p>{item.location}</p>
           </div>
         </div>
       );
