@@ -16,13 +16,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 ---
 
-<div class="flex flex-row flex-wrap gap-7 w-full justify-center items-center">
+<div class="flex flex-row flex-wrap gap-7 w-full justify-center items-start">
   {
     items.map((item) => {
       return (
         <div class="w-80 min-h-[300px]">
-          <div class="overflow-hidden">
-            <Image src={images[item.imgSrc]()} alt={item.title} />
+          <div class="overflow-hidden aspect-[12/7]">
+            <Image class="w-full h-full object-cover" src={images[item.imgSrc]()} alt={item.title} />
           </div>
 
           <div class="p-3 w-full">
