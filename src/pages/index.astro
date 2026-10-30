@@ -15,6 +15,16 @@ import Screenshots from "../assets/images/screenshots2.png";
 import FormImage from "../assets/images/form-image.png";
 import FuncapLogo from "../assets/images/funcap.png";
 import Activities from "../components/Activities.astro";
+
+const navLinks = [
+  { text: "Home", link: "#home" },
+  { text: "Sobre", link: "#about" },
+  { text: "Serviços", link: "#services" },
+  { text: "Atividades", link: "#activities" },
+  { text: "Equipe", link: "#squad" },
+  { text: "Cadastre-se", link: "#registry" },
+  { text: "Contato", link: "#contact" },
+];
 ---
 
 <Layout title="Zumbeedo">
@@ -23,7 +33,7 @@ import Activities from "../components/Activities.astro";
       class="bg-gradient-to-r items-center flex flex-col w-full from-brand-600 via-primary-600 to-primary-700"
     >
       <header
-        class="fixed bg-fixed z-20 bg-gradient-to-r from-brand-650 via-primary-650 to-primary-750 flex w-full justify-between px-16 py-5 border-b-2 border-white items-center flex-row"
+        class="group fixed bg-fixed z-20 bg-gradient-to-r from-brand-650 via-primary-650 to-primary-750 flex w-full justify-between px-6 sm:px-10 lg:px-16 py-5 border-b-2 border-white items-center flex-row"
       >
         <h1 class="text-2xl capitalize font-semibold text-secondary-200">
           <a href="#home">Zumbeedo</a>
@@ -31,28 +41,65 @@ import Activities from "../components/Activities.astro";
 
         <nav class="hidden lg:block md:w-3/5 xl:w-2/5">
           <ul class="flex flex-row justify-between">
-            <AnchorTag text="Home" link="#home" />
-            <AnchorTag text="Sobre" link="#about" />
-            <AnchorTag text="Serviços" link="#services" />
-            <AnchorTag text="Atividades" link="#activities" />
-            <AnchorTag text="Equipe" link="#squad" />
-            <AnchorTag text="Cadastre-se" link="#registry" />
-            <AnchorTag text="Contato" link="#contact" />
+            {navLinks.map((l) => <AnchorTag {...l} />)}
           </ul>
         </nav>
+
+        <button
+          id="menu-toggle"
+          class="lg:hidden text-white p-1"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            viewBox="0 0 24 24"
+          >
+            <path class="group-data-open:hidden" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path class="hidden group-data-open:block" d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+        <ul
+          id="mobile-menu"
+          class="lg:hidden absolute left-0 top-full w-full flex flex-col gap-5 px-6 py-6 text-lg bg-primary-750 border-b-2 border-white invisible opacity-0 -translate-y-2 transition-all duration-200 motion-reduce:transition-none group-data-open:visible group-data-open:opacity-100 group-data-open:translate-y-0"
+        >
+          {navLinks.map((l) => <AnchorTag {...l} />)}
+        </ul>
+        <script>
+          const header = document.querySelector("header");
+          const toggle = document.getElementById("menu-toggle");
+          const setOpen = (open: boolean) => {
+            header?.toggleAttribute("data-open", open);
+            toggle?.setAttribute("aria-expanded", String(open));
+            toggle?.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+          };
+          toggle?.addEventListener("click", () =>
+            setOpen(!header?.hasAttribute("data-open")),
+          );
+          document
+            .querySelectorAll("#mobile-menu a")
+            .forEach((a) => a.addEventListener("click", () => setOpen(false)));
+        </script>
       </header>
 
-      <section id="home" class="w-3/5 2xl:w-2/5 flex pb-16 pt-28 gap-4">
+      <section id="home" class="w-full px-6 sm:w-4/5 sm:px-0 lg:w-3/5 2xl:w-2/5 flex pb-16 pt-28 gap-4">
         <div class="w-full md:w-1/2 h-auto md:flex flex-col justify-center">
-          <p class="text-3xl pb-12">
+          <p class="text-3xl pb-12 text-white md:text-black">
             <span class="text-white">Um aplicativo inovador<br /></span> para monitorar
             e garantir o bem-estar contínuo das suas abelhas!
           </p>
 
-          <button
-            onclick="window.location.href='#registry'"
-            class="text-white border-4 active:opacity-50 font-bold text-2xl border-white w-fit py-1 px-2"
-            >Tenho interesse</button
+          <a
+            href="#registry"
+            class="text-white border-4 active:opacity-50 font-bold text-2xl border-white w-fit py-1 px-2 inline-block"
+            >Tenho interesse</a
           >
         </div>
 
@@ -82,7 +129,7 @@ import Activities from "../components/Activities.astro";
         <Pros
           icon="offline"
           title="Offline"
-          description="Diagnostico da colmeia no seu apiário sem necessidade de conexão com Internet."
+          description="Diagnóstico da colmeia no seu apiário sem necessidade de conexão com Internet."
         />
       </div>
 
@@ -115,7 +162,7 @@ import Activities from "../components/Activities.astro";
             </div>
             <div class="flex flex-row pt-4">
               <Icon icon="check" />
-              <p class="text-brand-700 pl-2">Diagnóstivo offline.</p>
+              <p class="text-brand-700 pl-2">Diagnóstico offline.</p>
             </div>
             <div class="flex flex-row pt-4">
               <Icon icon="check" />
@@ -248,11 +295,11 @@ import Activities from "../components/Activities.astro";
               imgSrc: "/src/assets/images/activities/centelha.png",
               title: "CENTELHA",
               description:
-                "Prêmio de 3° lugar no Programa de Incentivo  a startups inovadoras com capacitação e financiamento no Piauí.",
+                "Prêmio de 3° lugar no Programa de Incentivo a startups inovadoras com capacitação e financiamento no Piauí.",
             },
             {
               imgSrc: "/src/assets/images/activities/empreendedoras-tech.png",
-              title: "Empreededoras Tech",
+              title: "Empreendedoras Tech",
               description: "Programa de Apoio a Empreendedoras na Tecnologia.",
             },
             {
@@ -278,7 +325,7 @@ import Activities from "../components/Activities.astro";
             {
               imgSrc: "/src/assets/images/activities/coleta-teresina.png",
               title: "Coleta em Teresina",
-              description: "Coleta  de Audio realizada em Teresina, Piauí.",
+              description: "Coleta de Áudio realizada em Teresina, Piauí.",
             },
             {
               imgSrc: "/src/assets/images/activities/agro.png",
@@ -409,7 +456,7 @@ import Activities from "../components/Activities.astro";
             <button
               class="bg-secondary-400 py-2 w-fit text-brand-700 font-bold px-6 rounded-sm flex items-center justify-center"
             >
-              Submeter
+              Enviar
             </button>
             <script>
               const form = document.getElementById("form");
@@ -496,8 +543,7 @@ import Activities from "../components/Activities.astro";
       </p>
       <a
         class="text-secondary-600 pt-12"
-        target="_blank"
-        href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=zumbeedoapp@gmail.com&su=Contato+Zumbeedo"
+        href="mailto:zumbeedoapp@gmail.com?subject=Contato%20Zumbeedo"
         >E-mail: <span class="underline">zumbeedoapp@gmail.com</span></a
       >
     </section>
@@ -523,10 +569,10 @@ import Activities from "../components/Activities.astro";
       </script>
 
       <div class="flex flex-row py-12 gap-8">
-        <a target="_blank" href="https://www.instagram.com/zumbeedoapp/">
+        <a target="_blank" href="https://www.instagram.com/zumbeedoapp/" aria-label="Instagram">
           <Icon icon="instagram" />
         </a>
-        <a target="_blank" href="https://www.linkedin.com/company/zumbeedo/">
+        <a target="_blank" href="https://www.linkedin.com/company/zumbeedo/" aria-label="LinkedIn">
           <Icon icon="linkedin" />
         </a>
       </div>
@@ -550,7 +596,7 @@ import Activities from "../components/Activities.astro";
       </div>
       <div class="flex flex-col gap-2">
         <p class="text-sm font-light px-4 text-center text-secondary-250">
-          © 2024 Zumbeedo. Todos os direitos reservados.
+          © {new Date().getFullYear()} Zumbeedo. Todos os direitos reservados.
         </p>
 
         <p class="text-sm font-light px-4 text-center text-secondary-250">
