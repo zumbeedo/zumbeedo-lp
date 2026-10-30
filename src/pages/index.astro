@@ -370,20 +370,21 @@ import Activities from "../components/Activities.astro";
             Preencha os campos abaixo.
           </p>
           <form id="form" class="flex flex-col gap-5" method="POST">
-            <TextInput type="text" label="Nome" name="username" />
-            <TextInput type="email" label="E-mail" name="email" />
+            <TextInput type="text" label="Nome" name="username" required />
+            <TextInput type="email" label="E-mail" name="email" required />
             <TextInput
               id="phone"
-              type="text"
+              type="tel"
               maxlength={16}
               label="Telefone"
               name="phone"
+              required
             />
             <script>
               const input = document.getElementById("phone");
 
               input?.addEventListener(
-                "keypress",
+                "input",
                 () =>
                   ((input as HTMLInputElement).value = maskPhone(
                     (input as HTMLInputElement).value,
@@ -393,7 +394,7 @@ import Activities from "../components/Activities.astro";
               function maskPhone(v: string) {
                 v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
                 v = v.replace(/^(\d\d)(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-                v = v.replace(/(\(\d{2}\)) (\d)/g, "$1 $2 "); //Coloca um espaço entre o quarto e o quinto dígitos
+                v = v.replace(/(\(\d{2}\)) (\d)(\d)/g, "$1 $2 $3"); //Coloca um espaço entre o quarto e o quinto dígitos
                 v = v.replace(/(\d{4})(\d)/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
                 return v;
               }
@@ -408,6 +409,10 @@ import Activities from "../components/Activities.astro";
 
               const onSubmit = async (event: SubmitEvent) => {
                 event.preventDefault();
+                const button = (event.target as HTMLFormElement).querySelector(
+                  "button",
+                );
+                if (button) button.disabled = true;
                 const node = document.createElement("p");
                 node.textContent = "Enviando...";
                 node.classList.add(
@@ -425,9 +430,7 @@ import Activities from "../components/Activities.astro";
                   const phone = (data.namedItem("phone") as HTMLInputElement)
                     ?.value;
 
-                  console.log("form", name, email, phone);
-
-                  await fetch(
+                  const res = await fetch(
                     "https://zumbeedo-ai-api-homologacao.up.railway.app/early-access/",
                     {
                       method: "POST",
@@ -437,7 +440,9 @@ import Activities from "../components/Activities.astro";
                       body: JSON.stringify({ name, email, phone }),
                     },
                   );
+                  if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
+                  (event.target as HTMLFormElement).reset();
                   node.textContent = "Enviado!";
                   node.classList.replace(
                     "text-secondary-250",
@@ -450,6 +455,7 @@ import Activities from "../components/Activities.astro";
                     console.error(error.message);
                   }
                 } finally {
+                  if (button) button.disabled = false;
                   setTimeout(() => {
                     form?.removeChild(node);
                   }, 3000);
