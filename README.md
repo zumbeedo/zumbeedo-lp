@@ -38,6 +38,7 @@ Landing page oficial do Zumbeedo.
 - [Guia de conteúdo](#guia-de-conteúdo)
 - [Formulário de cadastro](#formulário-de-cadastro)
 - [Qualidade: desempenho, acessibilidade e SEO](#qualidade-desempenho-acessibilidade-e-seo)
+- [Meta Pixel](#meta-pixel)
 - [Deploy](#deploy)
 - [Contribuindo](#contribuindo)
 - [Equipe](#equipe)
@@ -86,7 +87,7 @@ Este repositório contém **apenas a landing page**. O aplicativo e a API ficam 
 | Imagens | `astro:assets`, que converte para WebP e gera `srcset` no build |
 | Tipos | TypeScript, checado com `astro check` a cada build |
 | Hospedagem | GitHub Pages, publicado por GitHub Actions |
-| Métricas | Meta Pixel |
+| Métricas | Meta Pixel, pronto em `MetaPixel.astro`, mas [desligado](#meta-pixel) |
 
 Não há framework de UI no cliente. Os poucos scripts da página (menu do celular, máscara de telefone e envio do formulário) são TypeScript puro dentro dos próprios componentes `.astro`.
 
@@ -139,9 +140,9 @@ zumbeedo-lp/
 │   │   │   ├── activities/      # cards de "Nossas Atividades Recentes"
 │   │   │   └── collaborators/   # fotos da equipe
 │   │   └── svgs/                # ícones usados pelo componente <Icon>
-│   ├── components/          # Activities, Collaborator, Pros, FuncDescription, TextInput, Icon…
+│   ├── components/          # Activities, Collaborator, Pros, FuncDescription, TextInput, Icon, MetaPixel…
 │   ├── layouts/
-│   │   └── Layout.astro     # <head>: metatags, Open Graph, Meta Pixel
+│   │   └── Layout.astro     # <head>: metatags e Open Graph
 │   ├── pages/
 │   │   └── index.astro      # a página inteira: menu, seções e formulário
 │   └── styles/
@@ -214,6 +215,19 @@ Content-Type: application/json
 
 - `lang="pt-BR"`, URL canônica, `description`, Open Graph e Twitter Card com imagem em URL absoluta.
 - `robots.txt` e `sitemap.xml` em `public/`.
+
+## Meta Pixel
+
+O pixel da Meta (ID `1563030861063294`) está **desligado** porque não há anúncios rodando. Ele coleta dados de navegação para anúncios, e pela LGPD isso só pode acontecer depois do consentimento de quem visita o site.
+
+O código continua pronto em [`src/components/MetaPixel.astro`](src/components/MetaPixel.astro). Para reativar quando forem anunciar:
+
+1. Crie um banner de consentimento com **Aceitar** e **Recusar** e salve a escolha no navegador (`localStorage`).
+2. Renderize `<MetaPixel />` no `<head>` de [`Layout.astro`](src/layouts/Layout.astro), mas só depois do **Aceitar**. Ou seja, os scripts dele precisam ser injetados pelo banner, e não carregados direto na página.
+3. Atualize a política de privacidade, se houver, citando a Meta.
+
+> [!WARNING]
+> Não basta só voltar com o `<MetaPixel />` no layout. Sem o banner, o pixel volta a rastrear todo mundo sem consentimento.
 
 ## Deploy
 
