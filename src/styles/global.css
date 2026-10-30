@@ -24,8 +24,19 @@
   --color-secondary-600: #544F4B;
 }
 
-/* Tailwind v4 dropped the default pointer cursor on buttons */
 @layer base {
+  /* offset anchors past the fixed header */
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Tailwind v4 dropped the default pointer cursor on buttons */
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
