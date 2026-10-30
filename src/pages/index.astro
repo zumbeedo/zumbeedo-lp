@@ -20,6 +20,7 @@ const navLinks = [
   { text: "Home", link: "#home" },
   { text: "Sobre", link: "#about" },
   { text: "Serviços", link: "#services" },
+  { text: "Telas", link: "#screens" },
   { text: "Atividades", link: "#activities" },
   { text: "Equipe", link: "#squad" },
   { text: "Cadastre-se", link: "#registry" },
@@ -235,7 +236,7 @@ const navLinks = [
     </section>
 
     <!-- SCREENSHOTS -->
-    <section class="bg-secondary-500 py-12 items-center">
+    <section id="screens" class="bg-secondary-500 py-12 items-center">
       <div>
         <h2
           class="text-center text-2xl sm:text-3xl font-bold text-secondary-200"
@@ -424,14 +425,15 @@ const navLinks = [
             Preencha os campos abaixo.
           </p>
           <form id="form" class="flex flex-col gap-5" method="POST">
-            <TextInput type="text" label="Nome" name="username" required />
-            <TextInput type="email" label="E-mail" name="email" required />
+            <TextInput type="text" label="Nome" name="username" autocomplete="name" required />
+            <TextInput type="email" label="E-mail" name="email" autocomplete="email" required />
             <TextInput
               id="phone"
               type="tel"
               maxlength={16}
               label="Telefone"
               name="phone"
+              autocomplete="tel"
               required
             />
             <script>
@@ -460,6 +462,13 @@ const navLinks = [
             </button>
             <script>
               const form = document.getElementById("form");
+              const status = document.createElement("p");
+              status.setAttribute("role", "status");
+              form?.appendChild(status);
+              const setStatus = (text: string, color: string) => {
+                status.textContent = text;
+                status.className = `text-sm font-bold ${color}`;
+              };
 
               const onSubmit = async (event: SubmitEvent) => {
                 event.preventDefault();
@@ -467,14 +476,7 @@ const navLinks = [
                   "button",
                 );
                 if (button) button.disabled = true;
-                const node = document.createElement("p");
-                node.textContent = "Enviando...";
-                node.classList.add(
-                  "text-secondary-250",
-                  "text-sm",
-                  "font-bold",
-                );
-                form?.appendChild(node);
+                setStatus("Enviando...", "text-secondary-250");
                 try {
                   const data = (event?.target as HTMLFormElement)?.elements;
                   const name = (data.namedItem("username") as HTMLInputElement)
@@ -497,22 +499,17 @@ const navLinks = [
                   if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
                   (event.target as HTMLFormElement).reset();
-                  node.textContent = "Enviado!";
-                  node.classList.replace(
-                    "text-secondary-250",
+                  setStatus(
+                    "Cadastro recebido! Em breve entraremos em contato.",
                     "text-green-400",
                   );
                 } catch (error) {
-                  node.textContent = "Erro! Tente novamente.";
-                  node.classList.replace("text-secondary-250", "text-red-400");
+                  setStatus("Não foi possível enviar. Tente novamente.", "text-red-400");
                   if (error instanceof Error) {
                     console.error(error.message);
                   }
                 } finally {
                   if (button) button.disabled = false;
-                  setTimeout(() => {
-                    form?.removeChild(node);
-                  }, 3000);
                 }
               };
 
