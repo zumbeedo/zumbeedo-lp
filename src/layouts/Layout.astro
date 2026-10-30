@@ -7,10 +7,11 @@ import "../styles/global.css";
 import phone from "../assets/images/android.png";
 
 const { title } = Astro.props;
+const ogImage = new URL(phone.src, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-secondary-250">
+<html lang="pt-BR" class="bg-secondary-250">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -42,7 +43,7 @@ const { title } = Astro.props;
       property="og:description"
       content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!"
     />
-    <meta property="og:image" content={phone.src} />
+    <meta property="og:image" content={ogImage} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -55,7 +56,7 @@ const { title } = Astro.props;
       property="twitter:description"
       content="Um aplicativo inovador para monitorar e garantir o bem-estar contínuo das suas abelhas!"
     />
-    <meta property="twitter:image" content={phone.src} />
+    <meta property="twitter:image" content={ogImage} />
 
     <!-- Meta Pixel Code -->
     <script is:inline>

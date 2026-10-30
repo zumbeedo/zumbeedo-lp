@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zumbeedo.com.br/sitemap.xml

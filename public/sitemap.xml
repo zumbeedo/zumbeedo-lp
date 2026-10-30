@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ponytail: single-page site; switch to @astrojs/sitemap if more pages are added -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://zumbeedo.com.br/</loc>
+  </url>
+</urlset>
