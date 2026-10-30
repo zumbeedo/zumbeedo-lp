@@ -22,7 +22,12 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
       return (
         <div class="bg-secondary-250 w-52 min-h-[330px]">
           <div class="h-52 overflow-hidden">
-            <Image src={images[item.imgSrc]()} alt={item.name} />
+            <Image
+              src={images[item.imgSrc]()}
+              alt={item.name}
+              widths={[208, 416]}
+              sizes="208px"
+            />
           </div>
 
           <div class="p-3 bg-secondary-250 w-full text-brand-700">

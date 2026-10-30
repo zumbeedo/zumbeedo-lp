@@ -22,7 +22,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
       return (
         <div class="w-80 min-h-[300px]">
           <div class="overflow-hidden aspect-[12/7]">
-            <Image class="w-full h-full object-cover" src={images[item.imgSrc]()} alt={item.title} />
+            <Image
+              class="w-full h-full object-cover"
+              src={images[item.imgSrc]()}
+              alt={item.title}
+              widths={[320, 640]}
+              sizes="320px"
+            />
           </div>
 
           <div class="p-3 w-full">
